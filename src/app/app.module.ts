@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './main/app.component';
+import { ToDoComponent } from './ToDo/to-do.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToDoComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: AppComponent
+      },
+      {
+        path: 'todoApp',
+        component: ToDoComponent
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

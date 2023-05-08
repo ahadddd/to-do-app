@@ -1,0 +1,5 @@
+div.header{
+    width: 100%; height: 100px;
+    background-color: rgba(63, 132, 251, 0.842);
+    position: absolute; top: 0px; left: 0px;
+}
