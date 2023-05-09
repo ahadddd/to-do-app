@@ -107,11 +107,11 @@
       <!--TO DO LIST SPLIT IN TWO PARTS-->
       <div style="display: flex; flex-direction: row" class="content">
         <input
+          (change)="toggle(i)"
           type="checkbox"
-          (change)="item.checked = !item.checked"          
           style="height: 20px; width: 20px; position: relative; top: 22px"
         />
-        <p [ngClass]="{strike: item.checked }" >{{ item.item }}</p>
+        <p [ngClass]="{'strike': i === selected}" >{{item}}</p>
       </div>
 
       <!--CONTROLS FOR EDIT/DELETE TO DO ITEM-->

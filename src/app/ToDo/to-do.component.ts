@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-to-do',
@@ -7,21 +8,33 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./to-do.component.css']
 })
 export class ToDoComponent implements OnInit {
-  items: any = [];
+  @ViewChild('listText', { static: true })
+  listText!: ElementRef;
+
+  items: any = ['Hello', 'World', 'Load', 'Test', 'Items'];
   editMode = false;
   itemData!: FormGroup;
   holder: number = 0;
   invalid = false;
-  checked = false;
+  complete = false;
+  selected = -1;
 
   ngOnInit(): void {
 
     this.itemData = new FormGroup({
-      item: new FormControl('Enter To-Do Item', [Validators.required, Validators.maxLength(5)]),
-      checked: new FormControl(false)
+      item: new FormControl('Enter', [Validators.required, Validators.maxLength(10)]),
     });
     console.log(this.item);
+
+  }
+
+  toggle(index: any) {
     
+    if (this.selected === index) {
+      this.selected = -1;
+    } else {
+      this.selected = index;
+    }
   }
 
   get item() {
@@ -30,7 +43,6 @@ export class ToDoComponent implements OnInit {
 
   addItem() {
     const itemControl = this.itemData.controls['item'];
-    const strikeControl = this.itemData.controls['checked'];
     if (itemControl.invalid) {
       console.log(itemControl.errors)
     }
@@ -49,20 +61,24 @@ export class ToDoComponent implements OnInit {
     //   alert('To do already exists.')
     // }
     if (itemControl.valid) {
-      this.items.push(this.itemData.getRawValue())
+      this.items.push(itemControl.getRawValue())
       this.itemData.reset()
     }
   }
 
 
   save() {
-    this.items[this.holder] = this.itemData.controls['item'].getRawValue();
-    this.holder = 0;
-    this.editMode = false;
-    this.itemData.reset();
+    const itemControl = this.itemData.controls['item'];
+    if (itemControl.valid) {
+      this.items[this.holder] = itemControl.getRawValue();
+      this.holder = 0;
+      this.editMode = false;
+      this.itemData.reset()
+    }
   }
 
   editToDo(index: any) {
+
     this.itemData.setValue({ item: this.items[index] })
     this.editMode = true;
     this.holder = index;
