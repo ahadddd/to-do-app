@@ -10,3 +10,8 @@ div.container{
 div.list{
     width: 90%; border: 1px solid; height: 500px;
 }
+
+div.item{
+    display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+    border: 1px solid;
+}

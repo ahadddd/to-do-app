@@ -1,16 +1,32 @@
 <div class="container">
-  <form (ngSubmit)="addItem()" [formGroup] = "itemData">
+  <div class="add" *ngIf="!editMode">
+    <form (ngSubmit)="addItem()" [formGroup]="itemData">
+      <input type="text" placeholder="Enter name" formControlName="item" />
 
-    <input type="text" placeholder="Enter name" formControlName = item  />
-    
-    <button type="submit">Add User</button>
-  </form>
+      <button type="submit">Add User</button>
+    </form>
+  </div>
+
+  <div class="edit" *ngIf="editMode">
+    <form (ngSubmit)="save()" [formGroup]="itemData">
+      <input type="text" placeholder="Enter name" formControlName="item" />
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+
   <div class="list">
-        <div class="item" *ngFor="let item of items; let i = index;" >
-            <p>{{item}}</p>
+    <div class="item" *ngFor="let item of items; let i = index">
+      <div style="display: flex; flex-direction: row;">
+        <input type="checkbox" />
+        <p>{{ item }}</p>
+      </div>
 
-            <button>Edit</button> 
-            <button>Delete</button>
-        </div>
+      <div>
+        <button (click)="editToDo(i)">Edit</button>
+
+        <button (click)="deleteToDo(i)">Delete</button>
+      </div>
     </div>
+  </div>
 </div>
