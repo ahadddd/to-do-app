@@ -1,1 +1,16 @@
-<p>to-do works!</p>
+<div class="container">
+  <form (ngSubmit)="addItem()" [formGroup] = "itemData">
+
+    <input type="text" placeholder="Enter name" formControlName = item  />
+    
+    <button type="submit">Add User</button>
+  </form>
+  <div class="list">
+        <div class="item" *ngFor="let item of items; let i = index;" >
+            <p>{{item}}</p>
+
+            <button>Edit</button> 
+            <button>Delete</button>
+        </div>
+    </div>
+</div>
