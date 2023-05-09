@@ -13,12 +13,27 @@
           font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
             Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
             sans-serif;
-          font-size: 20px; color: white;
-          border: none; border-radius: 4px;
+          font-size: 20px;
+          color: white;
+          border: none;
+          border-radius: 4px;
         "
       >
         ADD
       </button>
+
+      <div *ngIf="item?.errors" class="errors">
+        <p *ngIf="item.errors?.hasOwnProperty('maxlength')">
+          Length exceeded. Characters entered are:
+          {{item.errors?.['maxlength'].actualLength}}. Only
+          {{item.errors?.['maxlength'].requiredLength}}
+          are allowed.
+        </p>
+
+        <p *ngIf="item.errors?.hasOwnProperty('required')">
+          Field is required.
+        </p>
+      </div>
     </form>
   </div>
 
@@ -69,6 +84,19 @@
       >
         CANCEL
       </button>
+
+      <div *ngIf="item?.errors" class="errors">
+        <p *ngIf="item.errors?.hasOwnProperty('maxlength')">
+          Length exceeded. Characters entered are:
+          {{item.errors?.['maxlength'].actualLength}}. Only
+          {{item.errors?.['maxlength'].requiredLength}}
+          are allowed.
+        </p>
+
+        <p *ngIf="item.errors?.hasOwnProperty('required')">
+          Field is required.
+        </p>
+      </div>
     </form>
   </div>
 
@@ -80,9 +108,10 @@
       <div style="display: flex; flex-direction: row" class="content">
         <input
           type="checkbox"
+          (change)="item.checked = !item.checked"          
           style="height: 20px; width: 20px; position: relative; top: 22px"
         />
-        <p>{{ item }}</p>
+        <p [ngClass]="{strike: item.checked }" >{{ item.item }}</p>
       </div>
 
       <!--CONTROLS FOR EDIT/DELETE TO DO ITEM-->
