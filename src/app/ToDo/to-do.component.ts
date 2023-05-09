@@ -7,15 +7,16 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./to-do.component.css']
 })
 export class ToDoComponent implements OnInit {
-  items: any = ['Hello', 'World', 'Test', 'To-do', 'item'];
+  items: any = ['Hello', 'World', 'Test', 'To-do', 'item', 'Item2', 'Item3', 'Item4', 'Item5', 'Item6'];
   editMode = false;
   itemData!: FormGroup;
   holder: number = 0;
+  invalid = false;
 
   ngOnInit(): void {
 
     this.itemData = new FormGroup({
-      item: new FormControl('', [Validators.required])
+      item: new FormControl('', [Validators.required, Validators.maxLength(200)])
     });
   }
 
