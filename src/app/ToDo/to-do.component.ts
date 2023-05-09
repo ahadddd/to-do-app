@@ -63,4 +63,9 @@ export class ToDoComponent implements OnInit {
     this.items.splice(index, 1);
   }
 
+  cancelChanges() {
+    this.editMode = false;
+    this.itemData.reset();
+  }
+
 }

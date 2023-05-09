@@ -31,6 +31,7 @@
         style="width: 70%"
       />
 
+      <!--UPDATE TO DO BUTTON-->
       <button
         type="submit"
         style="
@@ -49,8 +50,9 @@
       >
         UPDATE
       </button>
+      <!--CANCEL CHANGES MADE TO TODO-->
       <button
-        type="submit"
+        (click)="cancelChanges()"
         style="
           font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
             Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
